@@ -4,6 +4,7 @@
 # Descriptions of variables in the output file are included in
 # the CodeBook.md.
 run_analysis <- function() {
+    require(reshape2)
     #0. Read Data from Files
     message("Reading data from files...")
     X_test<-read.table("UCI\ HAR\ Dataset/test/X_test.txt")
@@ -66,13 +67,12 @@ run_analysis <- function() {
     all_data<-cbind(subject_data, acts_data, X_data)
     rm(subject_data, acts_data, X_data)
     
-    #5. Make a New Tidy Data Set
-    require(reshape2)
+    #5. Make a New Tidy Data Set    
     tidy<-melt(all_data,id=c("Person_ID","Activity"))
     tidy<-dcast(tidy, Person_ID + Activity ~ variable, mean)
     
     #Write New Data Set to File
-    message("Writing tidy data file...")
+    message("Writing 'tidy_averages.txt' file...")
     write.table(tidy, file="tidy_averages.txt", row.names=FALSE)
     message("Done!")
 }
