@@ -14,6 +14,22 @@ I made no effort to ensure that this will run on arbitrary machines, so the form
 If there is a difference in locale between our machines, it might explain some differences in results.  Just in case, I have included sample output throughout Walkthrough Section 4 so that you can follow along and verify that the code works as advertised.
 
 
+#Running the Script and Reading the Output
+1. Download the raw data from <https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip>.
+2. Unzip it into the same directory as `run_analysis.R` so that "UCI HAR Dataset" is visible at the same level as `run_analysis.R`.
+3. Execute `run_analysis()`.
+4. A file named "tidy_averages.txt" will be created.
+5. Read the file using `tidy<-read.table("tidy_averages.txt")`.
+
+If there are any errors due to locale, operating system, or software versions in use, please use the walkthough (further below) rather than attempt to debug the code.
+
+
+#About the Codebook and Original Dataset
+The "Human Activity Recognition Using Smartphones Data Set" was designed for use by machine learning algorithms.  As such, you'll notice that the data in `X_test.txt` and `X_train.txt` was normalized so that every variable has minimum -1 and maximum 1.  As such, information about units has been erased and has no meaning in the context of this assignment.  Some unit information still exists in the lower-level data from the "Inertial Signals" folders; however those are expressly outside of the scope of the assignment (https://class.coursera.org/getdata-009/forum/thread?thread_id=58).
+
+Given the above context and given that we intentionally select "descriptive variable names" in `run_analysis()`, the codebook requirement is made quite simple.  It merely needs to contain the variable names, an indication that the variables are unitless, and information about Person_ID and Activity.  So, that's what it contains.
+
+
 #Walkthrough of the Code
 The subsections of the walkthrough are directly related to the in-code comments and very closesly related to the numbering provided in the assignment at 
 <https://class.coursera.org/getdata-009/human_grading/view/courses/972587/assessments/3/submissions>.
