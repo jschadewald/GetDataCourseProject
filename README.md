@@ -322,7 +322,7 @@ Like this:                  (Mean.of.the.Fourier.Transform.of.the.)(BodyAccJerk)
 And uses these references:  (\\1)(\\2)-(\\3)
 In the replacement pattern: \\1\\3.axis.of.the.\\2
 That expands like this:     (Mean.of.the.Fourier.Transform.of.the.)(Z).axis.of.the.(BodyAccJerk)
-To give:                    "Standard.Deviation.of.the.Fourier.Transform.of.the.Z.axis.of.the.BodyAccJerk"
+To give:                    "Mean.of.the.Fourier.Transform.of.the.Z.axis.of.the.BodyAccJerk"
 ```
 Similarly, the next line finds "Mag" and introduces the description "Magnitude.of.the." Notice that there is no conflict because none of the names have both an axis and a magnitude, which makes sense because magnitudes are computed by using all three axes.
 
