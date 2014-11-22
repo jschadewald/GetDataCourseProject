@@ -3,7 +3,7 @@ Hi Reviewer!
 
 Welcome to the README.md, and thank you very much for your consideration! :)
 
-In case you wandered here by mistake and are wondering what this is, it's a submission for the course project of the getdata-009 class on Coursera.org.  This README is designed to expand upon the in-code comments of the accompanying run_analysis.R, to provide my reasoning and interpration of the assignment where any ambiguity exists, and to provide tangible examples of how the data is being manipulated as the code executes.
+In case you wandered here by mistake and are wondering what this is, it's a submission for the course project of the getdata-009 class on Coursera.org.  This README is designed to expand upon the in-code comments of the accompanying run_analysis.R, to provide my reasoning and interpretation of the assignment where any ambiguity exists, and to provide tangible examples of how the data is being manipulated as the code executes.
 
 The code was tested exclusively on 64-bit Windows 7 with 64-bit R 3.1.2 and RStudio 0.98.1087.  It should also be noted that portions of the code use sub() to search and replace values in character vectors, and it's not clear to me whether or to what extent a difference in our locales might affect the results.  For your reference, here is my locale information:
 ```
@@ -19,10 +19,10 @@ If there is a difference in locale between our machines, it might explain some d
 2. Unzip it into your working directory so that "UCI HAR Dataset" is visible.
 3. Source `run_analysis.R`.
 3. Execute `run_analysis()`.
-4. A file named "tidy_averages.txt" will be createdin your working directory.
+4. A file named "tidy_averages.txt" will be created in your working directory.
 5. Read the file using `tidy<-read.table("tidy_averages.txt", header=TRUE)`.
 
-If there are any errors due to locale, operating system, or software versions in use, please use the walkthough (further below) rather than attempt to debug the code.
+If there are any errors due to locale, operating system, or software versions in use, please use the walkthrough (further below) rather than attempt to debug the code.
 
 
 #About the Codebook and Original Dataset
@@ -53,7 +53,7 @@ Of the remaining files in the zip:
 ##1. Merge Test and Training Sets
 In this section, the six local variables are condensed to three by binding the rows, taking care to preserve the order that test data comes before training data (the order is less important than the fact that it is consistent across all three data sets).  To free up memory, local variables are removed once they are no longer needed.
 
-In a slight deviation from instructions, the activities data and subjects data are left separate from the giant 561-variable data set (named `X_data` in the code).  This is done to make steps 3 and 4 easier.  At the end of Section 4, the activites and subjects are prepended as columns to `X_data` so that there is a single data frame containing all of the required data.
+In a slight deviation from instructions, the activities data and subjects data are left separate from the giant 561-variable data set (named `X_data` in the code).  This is done to make steps 3 and 4 easier.  At the end of Section 4, the activities and subjects are prepended as columns to `X_data` so that there is a single data frame containing all of the required data.
 
 Here, we can see that the order of observations is preserved and consistent:
 ```
@@ -73,7 +73,7 @@ Here, we can see that the order of observations is preserved and consistent:
 
 
 ##2. Extract mean() and std() for Each Measurement
-To start, thankfully, features.txt contains abbreviated names for all 561 measurements (columns) in `X_data`.  The code searches `features$V2` for values that match either "mean(" or "std" where the "(" was intentionally included so that we would not get matches for "meanFreq."  The decision to exclude meanFreq values is supported by the FAQ <https://class.coursera.org/getdata-009/forum/thread?thread_id=58>.  It's as good an interpretation as any, and it's quicker.
+To start, thankfully, features.txt contains abbreviated names for all 561 measurements (columns) in `X_data`.  The code searches `features$V2` for values that match either "mean(" or "std" where the "(" was intentionally included so that we would not get matches for "meanFreq."  The decision to exclude `meanFreq()` values is supported by the FAQ <https://class.coursera.org/getdata-009/forum/thread?thread_id=58>.  It's as good an interpretation as any, and it's quicker.
 
 The values returned from `grep()` to `mean_std_cols` are literally the column numbers of the data that we want to extract, so we use it to subset `X_data` and store the result back into `X_data`.  As well, since it's readily available, we might as well use it to prep the names for the columns of `X_data`, making step 4 easier later.  For reference, here are the columns that were extracted and named:
 ```
@@ -174,11 +174,11 @@ Mission accomplished!
 
 
 ##4. Set Descriptive Variable Names
-This part of the code first sets descriptive names for the activity and subject variables, then it calls makeGoodNames() to set names for `X_data`, and finally it completes the merging of data by binding activity and subject to the beginning of `X_data` (as columns).  I chose the name "Activity" for obvious reasons, and I chose "Person_ID" because it seems less ambiguous than "Subject" or "Subject_ID" while still maintaining the correct meaning.
+This part of the code first sets descriptive names for the activity and subject variables, then it calls `makeGoodNames()` to set names for `X_data`, and finally it completes the merging of data by binding activity and subject to the beginning of `X_data` (as columns).  I chose the name "Activity" for obvious reasons, and I chose "`Person_ID`" because it seems less ambiguous than "Subject" or "Subject_ID" while still maintaining the correct meaning.
 
-The bulk of the work done in the makeGoodNames() function is based on information provided in features_info.txt, and a full description of the meanings of the variables is given in CodeBook.md.  This section of the README covers how the names are transformed by the code.  As noted in the Introduction, the transformations are entirely accomplished through use of the sub() function, so a difference in our locales might result in different behavior if you execute the code on your own machine.
+The bulk of the work done in the `makeGoodNames()` function is based on information provided in features_info.txt, and a full description of the meanings of the variables is given in CodeBook.md.  This section of the README covers how the names are transformed by the code.  As noted in the Introduction, the transformations are entirely accomplished through use of the sub() function, so a difference in our locales might result in different behavior if you execute the code on your own machine.
 
-###The makeGoodNames() Function -- Beginnings
+###The `makeGoodNames()` Function -- Beginnings
 I prefer variable names that are easily readable by both humans and machines, so I avoid the use of spaces and instead use the period ('.') character.  As our starting point, recall the current values in `names(X_data)`:
 ```
 > names(X_data)
@@ -309,7 +309,7 @@ The result of executing the first three lines of `makeGoodNames()` is:
 ```
 
 ###Insert Fourier Transform (or not) descriptions
-The next two lines use the same technique to add "Fourier.Transform.of.the" to variables beginning with "f" and to remove "t" from the rest.  So for example,
+The next two lines use the same technique to add "Fourier.Transform.of.the." to variables beginning with "f" and to remove "t" from the rest.  So for example,
 * "Mean.of.the.tBodyAcc-Z" becomes "Mean.of.the.BodyAcc-Z", ("t" is removed) and
 * "Mean.of.the.fBodyAcc-Z" becomes "Mean.of.the.Fourier.Transform.of.the.BodyAcc-Z", ("f" is replaced).
 
@@ -403,7 +403,7 @@ For closure, here's the final snapshot:
 ```
 
 ###One more thing...
-After `makeGoodNames()` finishes execution but before proceeding to step 5, we need to complete the merging of the data from step 1.  This is accompished by using `cbind()`.  The order or arguments to `cbind()` is chosen so that `subjects_data` is the first column and `acts_data` is the second column of the resulting data frame.
+After `makeGoodNames()` finishes execution but before proceeding to step 5, we need to complete the merging of the data from step 1.  This is accomplished by using `cbind()`.  The order or arguments to `cbind()` is chosen so that `subjects_data` is the first column and `acts_data` is the second column of the resulting data frame.
 
 
 ##5. Make a New Tidy Data Set
