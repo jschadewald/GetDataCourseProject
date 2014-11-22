@@ -5,7 +5,7 @@ Welcome to the README.md, and thank you very much for your consideration! :)
 
 In case you wandered here by mistake and are wondering what this is, it's a submission for the course project of the getdata-009 class on Coursera.org.  This README is designed to expand upon the in-code comments of the accompanying run_analysis.R, to provide my reasoning and interpration of the assignment where any ambiguity exists, and to provide tangible examples of how the data is being manipulated as the code executes.
 
-I made no effort to ensure that this will run on arbitrary machines, so the format of the file paths may need to be modified to work on your system.  The code was tested exclusively on 64-bit Windows 7 with 64-bit R 3.1.2 and RStudio 0.98.1087.  It should also be noted that portions of the code use sub() to search and replace values in character vectors, and it's not clear to me whether or to what extent a difference in our locales might affect the results.  For your reference, here is my locale information:
+The code was tested exclusively on 64-bit Windows 7 with 64-bit R 3.1.2 and RStudio 0.98.1087.  It should also be noted that portions of the code use sub() to search and replace values in character vectors, and it's not clear to me whether or to what extent a difference in our locales might affect the results.  For your reference, here is my locale information:
 ```
 > Sys.getlocale()
 [1] "LC_COLLATE=English_United States.1252;LC_CTYPE=English_United States.1252;LC_MONETARY=English_United States.1252;LC_NUMERIC=C;LC_TIME=English_United States.1252"
@@ -16,10 +16,11 @@ If there is a difference in locale between our machines, it might explain some d
 
 #Running the Script and Reading the Output
 1. Download the raw data from <https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip>.
-2. Unzip it into the same directory as `run_analysis.R` so that "UCI HAR Dataset" is visible at the same level as `run_analysis.R`.
+2. Unzip it into your working directory so that "UCI HAR Dataset" is visible.
+3. Source `run_analysis.R`.
 3. Execute `run_analysis()`.
-4. A file named "tidy_averages.txt" will be created.
-5. Read the file using `tidy<-read.table("tidy_averages.txt")`.
+4. A file named "tidy_averages.txt" will be createdin your working directory.
+5. Read the file using `tidy<-read.table("tidy_averages.txt", header=TRUE)`.
 
 If there are any errors due to locale, operating system, or software versions in use, please use the walkthough (further below) rather than attempt to debug the code.
 
@@ -31,14 +32,14 @@ Given the above context and given that we intentionally select "descriptive vari
 
 
 #Walkthrough of the Code
-The subsections of the walkthrough are directly related to the in-code comments and very closesly related to the numbering provided in the assignment at 
+The subsections of the walkthrough are directly related to the in-code comments and very closely related to the numbering provided in the assignment at 
 <https://class.coursera.org/getdata-009/human_grading/view/courses/972587/assessments/3/submissions>.
 
 Differences and exceptions are noted in each section as relevant.
 
 
 ##0. Read Data from Files
-The code assumes that you have downloaded the zip from <https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip> and unzipped it into the same directory as run_analysis.R so that the folder "UCI HAR Dataset" is visible.  A total of six files are each read into their own local variable.
+The code assumes that you have downloaded the zip from <https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip> and unzipped it into your working directory so that the folder "UCI HAR Dataset" is visible.  A total of six files are each read into their own local variable.
 
 I opted not to load any data from the sub-folders named "Inertial Signals" since they are not relevant to the assignment.  For reference, please see the FAQ from Community TA David Hood, here:
 <https://class.coursera.org/getdata-009/forum/thread?thread_id=58>.
