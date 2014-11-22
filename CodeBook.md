@@ -26,7 +26,7 @@ All of the values in `tidy_averages.txt` represent averages of the named variabl
 
 [1] **_NA_**
 
-`Person_ID` is a number from 1 to 30 that represents the human test subject (user of the phone) for whom the data was collected and the measures were calculated.  It was not a named column in the original UCI HAR Dataset, but its values were stored in the `subject_test.txt` and `subject_train.txt` files.
+`Person_ID` is a number from 1 to 30 that represents the human test subject (user of the phone) from whom the data was collected and the measures were calculated.  It was not a named column in the original UCI HAR Dataset, but its values were stored in the `subject_test.txt` and `subject_train.txt` files.
 
 
 **Activity**
